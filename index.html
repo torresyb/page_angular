@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>angular</title>
+	<link rel="stylesheet" href="css/bootstrap.css" />
+</head>
+<body>
+	
+	<div ng-controller="pagectr" class="table-responsive">
+		<!-- 表格数据 -->
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>姓名</th>
+					<th>详情</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in items | startFrom: pagination.page * pagination.perPage | limitTo: pagination.perPage">
+					<td>{{item.id}}</td>
+					<td>{{item.name}}</td>
+					<td>{{item.description}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- 分页 -->
+		<ul class="pagination">
+			<li>
+				<a href="" ng-click="pagination.prevPage()">&laquo;</a>
+			</li>
+			<li><a href="" ng-hide="pagination.first" ng-click="pagination.toPageId(0)">首页</a></li>
+		  	<li ng-repeat="n in [] | range: pagination.numPages | intervalPage:pagination.interval:pagination.page:pagination.perPage:pagination.numPages" ng-class="{active: n == pagination.page}">
+		  		<a href="" ng-click="pagination.toPageId(n)">{{n + 1}}</a>
+		  	</li>
+		  	<li><a href="" ng-hide="pagination.last" ng-click="pagination.toPageId(pagination.numPages-1)">尾页</a></li>
+		  	<li>
+		  		<a href="" ng-click="pagination.nextPage()">&raquo;</a>
+		  	</li>
+		</ul>
+		<!-- End 分页 -->
+	</div>
+
+	<script src="js/angular.js"></script>
+	<script src="js/serval.js"></script>
+	<script src="js/app.js"></script>
+</body>
+</html>
